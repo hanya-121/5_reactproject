@@ -1,0 +1,52 @@
+* mysql 설치
+1.
+mysql 다운로드 검색 *한국어로 다운로드라고 검색 해야 뜸 >> 용량 더 큰거 선택
+( https://dev.mysql.com/downloads/installer/ )
+
+2.
+설치 시
+full 선택 / 포트:3306 그대로 / 패스워드는 쉽게 1234
+권한 설정 yes
+router 어쩌고 체크하면 안됨!!!!!!!!!!
+
+
+* 서버 만들기
+1.
+create database bbs; // 실행 후 삭제
+
+2.
+use bbs;
+create table BOARD( 테이블명이 보드인걸 만드는데 세부 항목이 id,title, content
+BOARD_ID int not null auto_increment primary key,
+BOARD_TITLE varchar(100),
+BOARD_CONTENT varchar(500),
+REGISTER_ID varchar(50),
+REGISTER_DATE DATETIME default now(),
+UPDATER_ID varchar(50),
+UPDATER_DATE DATETIME default now()
+); // 실행 후 삭제
+
+3.
+insert into BOARD(BOARD_TITLE, BOARD_CONTENT, REGISTER_ID) values ('아 또 월요일이네','차라리 금요일이라면','황영일');
+select * from board; // 실행 하는대로 보드에 쌓임
+
+4.
+CREATE USER 'root'@'%' IDENTIFIED BY 'root';  (에러 뜨면 첫째 줄 삭제)
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '1234'; // 권한 설정 실행
+
+5.
+왼쪽 하단 administration > 왼쪽 카테고리 users and privillegers 클릭 (서버 생성 확인용)
+
+6.
+상단 메뉴 query - auto cummit transections 체크 해제
+
+7. cd client - npm start
+    cd server - npm run dev
+
+8.
+select * from board;
+
+* 보드라고 되어있는 테이블에 플레이스홀더 3개를 선택하여 거기에 값을 담는다
+  게시판 작동을 확인하기위한 더미데이터 이라고 한다
